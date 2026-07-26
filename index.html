@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESPÉCIMEN 003 — Sonríe siempre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #14110d;
+    --bg-soft: #1c1812;
+    --paper: #eee7d8;
+    --ball: #f2c53d;
+    --ball-dim: #b98f1f;
+    --warn: #b23b2e;
+    --line: rgba(238,231,216,0.14);
+    --muted: rgba(238,231,216,0.55);
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--paper);
+    font-family:'Fraunces', serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{ font-family:'JetBrains Mono', monospace; }
+
+  /* ---------- top ticker ---------- */
+  .ticker{
+    background:var(--warn);
+    color:var(--paper);
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.08em;
+    padding:7px 0;
+    overflow:hidden;
+    white-space:nowrap;
+    position:relative;
+  }
+  .ticker span{
+    display:inline-block;
+    padding-left:100%;
+    animation:scroll 22s linear infinite;
+  }
+  @keyframes scroll{
+    0%{ transform:translateX(0); }
+    100%{ transform:translateX(-100%); }
+  }
+
+  /* ---------- header ---------- */
+  header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:26px 6vw 0;
+  }
+  .brand{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    letter-spacing:0.14em;
+    color:var(--muted);
+    text-transform:uppercase;
+  }
+  .brand b{ color:var(--paper); }
+  .tag-id{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--ball);
+    border:1px solid var(--line);
+    padding:5px 10px;
+    border-radius:2px;
+    letter-spacing:0.05em;
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    max-width:1180px;
+    margin:0 auto;
+    padding:60px 6vw 40px;
+    display:grid;
+    grid-template-columns:1.05fr 0.95fr;
+    gap:64px;
+    align-items:center;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.16em;
+    color:var(--muted);
+    text-transform:uppercase;
+    margin-bottom:18px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:7px; height:7px;
+    background:var(--ball);
+    border-radius:50%;
+    display:inline-block;
+    box-shadow:0 0 10px 2px rgba(242,197,61,0.6);
+  }
+  h1{
+    font-size:clamp(2.4rem, 4.6vw, 4.1rem);
+    font-weight:500;
+    line-height:1.03;
+    margin:0 0 22px;
+    letter-spacing:-0.01em;
+  }
+  h1 em{
+    font-style:italic;
+    color:var(--ball);
+    font-weight:300;
+  }
+  .lede{
+    font-family:'JetBrains Mono', monospace;
+    font-size:14.5px;
+    line-height:1.75;
+    color:var(--muted);
+    max-width:46ch;
+    margin-bottom:34px;
+  }
+
+  .price-row{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    margin-bottom:28px;
+  }
+  .price{
+    font-size:2.6rem;
+    color:var(--ball);
+    font-weight:500;
+  }
+  .price-note{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--muted);
+  }
+
+  .cta{
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
+    background:var(--ball);
+    color:#181410;
+    font-family:'JetBrains Mono', monospace;
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:0.04em;
+    padding:16px 26px;
+    border-radius:2px;
+    text-decoration:none;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+    box-shadow:0 0 0 rgba(242,197,61,0);
+  }
+  .cta:hover{
+    transform:translateY(-2px);
+    background:#ffd75a;
+    box-shadow:0 10px 30px -6px rgba(242,197,61,0.45);
+  }
+  .cta::after{ content:"→"; }
+  .cta-note{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:var(--muted);
+    margin-top:12px;
+  }
+
+  /* ---------- specimen visual ---------- */
+  .specimen{
+    position:relative;
+    background:var(--bg-soft);
+    border:1px solid var(--line);
+    border-radius:3px;
+    padding:40px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:26px;
+  }
+  .specimen::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      radial-gradient(circle at 50% 38%, rgba(242,197,61,0.10), transparent 60%);
+    pointer-events:none;
+  }
+  .stage{
+    width:100%;
+    aspect-ratio:1/1;
+    max-width:280px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+  }
+  .ball-photo{
+    width:78%;
+    height:78%;
+    border-radius:50%;
+    background-size:cover;
+    background-position:center;
+    position:relative;
+    transition:background .3s ease;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.6);
+  }
+  /* PLACEHOLDER FACE — reemplaza con tu foto real vía background-image en JS de abajo */
+  .ball-photo{ background-color: var(--ball); }
+  .ball-photo .face{
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .ball-photo svg{ width:60%; height:60%; }
+
+  .specimen-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.1em;
+    color:var(--muted);
+    text-align:center;
+    border-top:1px dashed var(--line);
+    padding-top:14px;
+    width:100%;
+  }
+
+  /* ---------- section: dossier ---------- */
+  .dossier{
+    max-width:1180px;
+    margin:0 auto;
+    padding:70px 6vw;
+    border-top:1px solid var(--line);
+  }
+  .dossier-grid{
+    display:grid;
+    grid-template-columns:0.7fr 1.3fr;
+    gap:60px;
+  }
+  .section-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--ball);
+  }
+  .dossier h2{
+    font-size:clamp(1.6rem,2.6vw,2.2rem);
+    font-weight:500;
+    line-height:1.25;
+    margin:14px 0 0;
+    max-width:16ch;
+  }
+  .dossier-body p{
+    font-family:'JetBrains Mono', monospace;
+    font-size:14px;
+    line-height:1.85;
+    color:var(--muted);
+    max-width:62ch;
+    margin:0 0 20px;
+  }
+  .dossier-body strong{ color:var(--paper); }
+
+  /* ---------- features ---------- */
+  .features{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 6vw 80px;
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+  }
+  .feature{
+    background:var(--bg);
+    padding:32px 26px;
+  }
+  .feature .num{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:var(--ball-dim);
+    margin-bottom:16px;
+    display:block;
+  }
+  .feature h3{
+    font-size:1.15rem;
+    font-weight:500;
+    margin:0 0 10px;
+  }
+  .feature p{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--muted);
+    line-height:1.7;
+    margin:0;
+  }
+
+  /* ---------- testimonials ---------- */
+  .testimonials{
+    border-top:1px solid var(--line);
+    padding:70px 6vw;
+  }
+  .testimonials-inner{
+    max-width:1180px;
+    margin:0 auto;
+  }
+  .t-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:34px;
+    margin-top:36px;
+  }
+  .t-card{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13.5px;
+    line-height:1.75;
+    color:var(--muted);
+  }
+  .stars{ color:var(--ball); font-size:13px; margin-bottom:12px; letter-spacing:2px; }
+  .t-name{ color:var(--paper); margin-top:14px; font-size:12px; }
+
+  /* ---------- final cta ---------- */
+  .final{
+    text-align:center;
+    padding:100px 6vw 110px;
+    border-top:1px solid var(--line);
+    position:relative;
+    overflow:hidden;
+  }
+  .final::before{
+    content:"";
+    position:absolute;
+    top:50%; left:50%;
+    width:600px; height:600px;
+    background:radial-gradient(circle, rgba(242,197,61,0.12), transparent 65%);
+    transform:translate(-50%,-50%);
+    pointer-events:none;
+  }
+  .final h2{
+    font-size:clamp(2rem,4vw,3.2rem);
+    font-weight:500;
+    margin:0 0 14px;
+    position:relative;
+  }
+  .final .lede{ margin:0 auto 36px; }
+  .stock-note{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--warn);
+    margin-top:16px;
+    letter-spacing:0.05em;
+  }
+
+  /* ---------- footer ---------- */
+  footer{
+    border-top:1px solid var(--line);
+    padding:34px 6vw;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:14px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    color:var(--muted);
+  }
+
+  @media (max-width: 860px){
+    .hero{ grid-template-columns:1fr; padding-top:36px; }
+    .dossier-grid{ grid-template-columns:1fr; gap:24px; }
+    .features{ grid-template-columns:1fr; }
+    .t-grid{ grid-template-columns:1fr; gap:28px; }
+    .specimen{ order:-1; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .ticker span{ animation:none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ticker mono"><span>ESPÉCIMEN 003 — DISPONIBILIDAD LIMITADA · SE ENTREGA EN MANO O ENVÍO POR WALLAPOP · NO SE ACEPTAN DEVOLUCIONES ·&nbsp; &nbsp; ESPÉCIMEN 003 — DISPONIBILIDAD LIMITADA · SE ENTREGA EN MANO O ENVÍO POR WALLAPOP · NO SE ACEPTAN DEVOLUCIONES ·</span></div>
+
+<header>
+  <div class="brand mono"><b>ARCHIVO</b> · Nº 003</div>
+  <div class="tag-id">Espécimen Y-01</div>
+</header>
+
+<section class="hero">
+  <div>
+    <div class="eyebrow">registro activo</div>
+    <h1>Sonríe.<br><em>Siempre.</em><br>No preguntes por qué.</h1>
+    <p class="lede">Un objeto redondo, amarillo, y perpetuamente feliz. Nadie sabe muy bien qué es, pero todo el que lo tiene cerca deja de querer separarse de él. Réplica física exacta del espécimen original.</p>
+
+    <div class="price-row">
+      <span class="price">4,12&nbsp;€</span>
+      <span class="price-note">precio único · sin gastos ocultos</span>
+    </div>
+
+    <a class="cta" href="https://es.wallapop.com/item/verity-1285166048" target="_blank" rel="noopener">Llevármela</a>
+    <div class="cta-note">te redirige a Wallapop para cerrar la compra</div>
+  </div>
+
+  <div class="specimen">
+    <div class="stage">
+      <!-- PLACEHOLDER: pon tu imagen generada con IA como background-image
+           de #ballPhoto (ver script al final del archivo), o cambia esto
+           por una etiqueta <img src="tu-imagen.jpg" style="width:100%;
+           height:100%; border-radius:50%; object-fit:cover;"> -->
+      <div class="ball-photo" id="ballPhoto"></div>
+    </div>
+    <div class="specimen-label">réplica física exacta · unidad única · color original</div>
+  </div>
+</section>
+
+<section class="dossier">
+  <div class="dossier-grid">
+    <div>
+      <div class="section-label">el objeto</div>
+      <h2>Nadie recuerda cuándo empezó a estar de moda tenerlo cerca.</h2>
+    </div>
+    <div class="dossier-body">
+      <p>Empezó como una curiosidad. Ahora hay listas de espera. La bola no hace nada — no habla, no se mueve, no necesita pilas — y aun así, quien la tiene en su mesa dice lo mismo: <strong>da paz tenerla ahí</strong>.</p>
+      <p>Réplica exacta del espécimen original, con acabado mate idéntico al de la unidad de referencia. Un único color: el amarillo original.</p>
+    </div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="feature">
+    <span class="num mono">01</span>
+    <h3>Réplica exacta</h3>
+    <p>Reproducción fiel del espécimen original, mismo tamaño, mismo acabado.</p>
+  </div>
+  <div class="feature">
+    <span class="num mono">02</span>
+    <h3>Tamaño de mesa</h3>
+    <p>Pensada para estar siempre a la vista: escritorio, estantería, mesita de noche.</p>
+  </div>
+  <div class="feature">
+    <span class="num mono">03</span>
+    <h3>Edición limitada</h3>
+    <p>Se fabrica bajo pedido, en tandas pequeñas. Cuando se acaba, se acaba.</p>
+  </div>
+</section>
+
+<section class="testimonials">
+  <div class="testimonials-inner">
+    <div class="section-label">registros de otros propietarios</div>
+    <div class="t-grid">
+      <div class="t-card">
+        <div class="stars">★★★★★</div>
+        “No sé explicarlo, pero desde que la tengo en el escritorio trabajo más tranquilo.”
+        <div class="t-name mono">— M.</div>
+      </div>
+      <div class="t-card">
+        <div class="stars">★★★★★</div>
+        “La compré para regalar y me la quedé yo. La voy a tener que comprar otra vez.”
+        <div class="t-name mono">— R.</div>
+      </div>
+      <div class="t-card">
+        <div class="stars">★★★★★</div>
+        “Llegó antes de lo que pensaba y el acabado es mucho mejor de lo que esperaba por el precio.”
+        <div class="t-name mono">— A.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="eyebrow" style="justify-content:center;">últimas unidades de esta tanda</div>
+  <h2>¿Tú también la quieres cerca?</h2>
+  <p class="lede" style="margin-left:auto; margin-right:auto; text-align:center;">4,12 € · réplica exacta del espécimen original.</p>
+  <a class="cta" href="https://es.wallapop.com/item/verity-1285166048" target="_blank" rel="noopener">Llevármela</a>
+  <div class="stock-note mono">quedan pocas unidades de esta tanda</div>
+</section>
+
+<footer>
+  <div>© ARCHIVO — Espécimen 003</div>
+  <div>Compra gestionada de forma segura a través de Wallapop</div>
+</footer>
+
+<script>
+  // Para poner tu imagen generada con IA, descomenta la línea de abajo
+  // y sustituye 'tu-imagen.jpg' por el nombre de tu archivo (debe estar
+  // en la misma carpeta que este index.html, o pon la URL completa):
+  //
+  // document.getElementById('ballPhoto').style.backgroundImage = "url('bola.jpg')";
+</script>
+
+</body>
+</html>
